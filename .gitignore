@@ -1,0 +1,16 @@
+# Private runtime data never belongs in this starter repository.
+private_wiki/
+my_wiki/
+.env
+.env.*
+!.env.example
+state.db*
+*.sqlite*
+*.db
+config.yaml
+auth.json
+*.log
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
