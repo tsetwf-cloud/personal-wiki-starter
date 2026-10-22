@@ -1,8 +1,8 @@
 ---
 name: wiki-approved-merge
 description: Use when merging explicitly approved Wiki items.
-version: 0.1.0
-author: 阿生, Hermes Agent
+version: 0.2.0
+author: 阿生
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
@@ -17,6 +17,9 @@ metadata:
 
 ## Prerequisites
 用户给出 Wiki 根目录和本次审批指令。审核文件、归档来源和目标页必须存在。歧义先查当前待审记录；同ID对应多来源时询问，不猜测。
+
+## 工具适配
+本文的 `read_file`、`search_files`、`write_file`、`patch`、`terminal` 是能力名称，不要求工具同名。Hermes 可用对应工具；Claude Code 可用 Read、Grep/Glob、Write、Edit、Bash/PowerShell；Codex 可用本地读取、搜索、补丁和命令执行工具。用当前环境可用的等效能力完成步骤，不能虚构工具返回值。缺少能力或权限时报告阻塞，不跳过哈希、备份或审批。Windows 命令应使用对应的 PowerShell / Python 写法，不照抄 Bash。
 
 ## Procedure
 1. 用 `read_file` 读取规则、审核文件、目标页和索引；按来源哈希核验原件。完成标准：明确本次的批准、拒绝、待审编号集合。

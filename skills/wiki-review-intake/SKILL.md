@@ -1,8 +1,8 @@
 ---
 name: wiki-review-intake
 description: Use when preparing Wiki source review candidates.
-version: 0.1.0
-author: 阿生, Hermes Agent
+version: 0.2.0
+author: 阿生
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
@@ -19,6 +19,9 @@ metadata:
 
 ## Prerequisites
 用户给出 Wiki 根目录、精确来源路径、资料可发送给当前模型的许可。若文件可能是仅限本地或高敏资料，不先读正文来检查，先让用户提供最小化副本。需要本地文件工具和 Python 3 标准库。
+
+## 工具适配
+本文的 `read_file`、`search_files`、`write_file`、`patch`、`terminal` 是能力名称，不要求工具同名。Hermes 可用对应工具；Claude Code 可用 Read、Grep/Glob、Write、Edit、Bash/PowerShell；Codex 可用本地读取、搜索、补丁和命令执行工具。用当前环境可用的等效能力完成步骤，不能虚构工具返回值。缺少能力或权限时报告阻塞，不跳过哈希、备份或审批。Windows 命令应使用对应的 PowerShell / Python 写法，不照抄 Bash。
 
 ## Procedure
 1. 用 `read_file` 读 AGENTS.md、SCHEMA.md、index.md、资料导入规范.md 与受影响正式页。完成标准：知道已批准目录及已有事实。

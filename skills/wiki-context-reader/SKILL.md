@@ -1,8 +1,8 @@
 ---
 name: wiki-context-reader
 description: Use when answering with a personal Wiki background.
-version: 0.1.0
-author: 阿生, Hermes Agent
+version: 0.2.0
+author: 阿生
 license: MIT
 platforms: [linux, macos, windows]
 metadata:
@@ -17,6 +17,9 @@ metadata:
 
 ## Prerequisites
 用户提供 Wiki 根目录与本次可读取范围。不要假设机器路径。云模型读取资料前确认用户允许把相关内容发送给当前提供方；仅限本地资料不得读入云端上下文。
+
+## 工具适配
+本文的 `read_file`、`search_files`、`write_file`、`patch`、`terminal` 是能力名称，不要求工具同名。Hermes 可用对应工具；Claude Code 可用 Read、Grep/Glob、Write、Edit、Bash/PowerShell；Codex 可用本地读取、搜索、补丁和命令执行工具。用当前环境可用的等效能力完成步骤，不能虚构工具返回值。缺少能力或权限时报告阻塞，不跳过哈希、备份或审批。Windows 命令应使用对应的 PowerShell / Python 写法，不照抄 Bash。
 
 ## Procedure
 1. 用 `read_file` 读取根目录的 AGENTS.md、SCHEMA.md、index.md 与资料导入规范.md。完成标准：知道正式页、审核和来源边界。
