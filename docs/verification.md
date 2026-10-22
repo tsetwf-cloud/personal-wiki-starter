@@ -24,7 +24,13 @@
 
 - 初始化与结构检查：主模型独立重跑 `python3 -B -m unittest discover -s tests -v`，14 项测试通过，实测耗时 3.315 秒；直接检查随仓库分发的模板，返回 `ok: true`。覆盖新建/空目录、拒绝非空与重复初始化、父子目标与符号链接拒绝、缺结构、坏链接、JSON 错误和只读性。
 
-GitHub 发布后的读取和 CI 结果另行追加。
+## GitHub 发布后验收
+
+- 公开仓库已建立：https://github.com/tsetwf-cloud/personal-wiki-starter 。通过 GitHub API 回读确认为 public，默认分支 main。
+- 教程和三份 Skill 的 raw URL 均实际下载，并逐字节核对与本地文件一致。网络出现过超时，重试后成功；不承诺各地区可直接访问。
+- 使用独立的临时 HERMES_HOME 从公开 URL 安装三份 Skill，均通过内置扫描（SAFE）且安装文件逐字节一致；未使用 --force，也未修改日常 profile。SAFE 是扫描结果，不是权限隔离保证。
+- 首次 GitHub Actions 因 runner.temp 放在不支持该上下文的位置而未启动任务；改到测试步骤的 env 后，第二次运行成功。实际运行记录：https://github.com/tsetwf-cloud/personal-wiki-starter/actions/runs/39715662119 。Ubuntu / Python 3.12 的单元测试和模板检查均通过。
+- 发布前审阅 29 个公开文件，私有路径、已知联系人标识和常见令牌形态扫描无命中。仅发布重新编写的公开材料，没有上传真实档案、聊天或验收运行日志。扫描只是辅助检查。
 
 ## 不能从测试推出的结论
 
