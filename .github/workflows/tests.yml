@@ -1,4 +1,4 @@
-name: starter-tests
+name: personal-wiki-tests
 on: [push, pull_request]
 permissions:
   contents: read
@@ -10,9 +10,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run standard-library tests
+      - name: Test current package and preserved root tests
         env:
           TMPDIR: ${{ runner.temp }}
-        run: python3 -m unittest discover -s tests -v
-      - name: Validate shipped template
-        run: python3 scripts/wiki_tool.py check --root templates/wiki
+        run: python3 -B -m unittest discover -s tests -v
+      - name: Check preserved legacy template
+        run: python3 legacy/scripts/wiki_tool.py check --root legacy/templates/wiki

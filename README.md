@@ -1,86 +1,48 @@
-# Personal Wiki Starter
+# 个人 Wiki Skill
 
-Hermes、Codex CLI、Claude Code 通用的个人 Wiki 教学包。用自己的 Markdown 保存背景，AI 按需读取、先提候选、本人批准后再更新。
+把你选定的对话和文件，整理成以后还能用得上的个人知识：**先看候选，逐项审核，批准后入库**。换一个会话，AI 也能从正式知识页了解你的背景，不必每次重新讲一遍。
 
-作者：阿生。所有模板与练习均重新编写，不含私人档案。**从 [完整实操教程](docs/tutorial.md) 开始。**
+你会得到保存在自己目录里的 Markdown 知识页，以及对应的来源、审核状态和更新记录。适合整理沟通偏好、已有判断、工作背景和计划；计划会与已发生的事实分开，没批准的内容留在待审区。
 
-## 选一个工具就能跟做
+当前公开候选版本：`0.2.0-rc.1`。建议先用虚构或低敏感资料走完一次流程，再决定是否交给它真实资料。
 
-不用为了本教程安装 Hermes，也不用装齐三款工具。已有 Codex CLI 或 Claude Code 就直接使用；本文的 Claude 指 Claude Code，不是普通网页聊天框。
+## 把这段话交给你的 AI
 
-- 同一套正式页面、来源与审核规则。
-- 三份通用 Skill，初始化后在私人库内直接读取，无需先全局安装。
-- Bash 与 Windows PowerShell 分别给出命令，不混用终端。
-- [工具安装与可选原生 Skill 安装](docs/agents.md)。
+需要一个能读取本地文件、创建文件并运行命令的 Agent。复制下面的请求即可，不需要先安装 Hermes：
 
-支持设计不等于所有环境都实测：本地 AI 工作流验证环境为 WSL，实际结果与限制见 [验证记录](docs/verification.md)。
+> 帮我从 https://github.com/tsetwf-cloud/personal-wiki-starter 下载完整的个人 Wiki Skill 包，放到我确认的独立目录，不覆盖已有文件。请先读取包根目录的 SKILL.md，核对版本并检查文件和命令能力，再按说明引导我配置。这次使用 0.2.0-rc.1 公开候选，不做宿主全局注册，也不要只下载 SKILL.md。先用当前对话和我逐个指定的文件，暂不接聊天渠道或设置定时；读资料前先和我确认范围及模型处理许可。
 
-## 快速开始
+这里的“安装”是下载完整包并让当前 Agent 读取其中的说明，不代表注册成所有会话都能自动发现的全局 Skill。没有文件或命令能力的聊天界面不能代你完成这一步。
 
-前提：Python 3.10+、Git，以及一个可读写本地文件的 Agent。
+接下来按 [客户操作指南](USER_GUIDE.md) 完成七步：安装 → 建库 → 选渠道 → 定范围和模型许可 → 交资料 → 部分审核 → 新会话使用。想先看实际效果，可看 [七步真实操作与截图](docs/seven_steps/README.md)，无需观看视频。
 
-Linux / macOS / WSL：
+![部分审核示例：批准沟通偏好，学习笔记计划保留待审](docs/seven_steps/screenshots/06_approved.png)
 
-```bash
-git clone https://github.com/tsetwf-cloud/personal-wiki-starter.git
-cd personal-wiki-starter
-python3 scripts/wiki_tool.py init --root "$HOME/my_personal_wiki"
-python3 scripts/wiki_tool.py check --root "$HOME/my_personal_wiki"
-cd "$HOME/my_personal_wiki"
-```
+*示例人物和资料均为虚构；截图展示同一次操作中的部分批准结果。*
 
-Windows PowerShell：
+## 能做什么
 
-```powershell
-git clone https://github.com/tsetwf-cloud/personal-wiki-starter.git
-Set-Location personal-wiki-starter
-py -3 scripts/wiki_tool.py init --root "$HOME/my_personal_wiki"
-py -3 scripts/wiki_tool.py check --root "$HOME/my_personal_wiki"
-Set-Location "$HOME/my_personal_wiki"
-```
+- 新建空白库，或先检查再接管结构兼容的已有库，不覆盖原有正文。
+- 按明确范围归档原文，保留字节哈希并去重；候选展示依据、内容类型和完整保存位置。
+- 逐项批准、修改、拒绝或稍后处理；支持部分审核，敏感内容、新路径和整页替换另行确认。
+- 更新正式页时检查旧版本哈希，保留备份与动作日志；提供锁、中断恢复、正式知识检索和检查命令。
+- 可选使用通用消息 JSONL 或只读采集 Hermes 已收到且获授权的私聊，生成本地待审摘要。没有 Hermes 也能使用核心流程。
 
-成功返回 `ok: true`。init 拒绝非空目标，不能用来覆盖升级旧库。私人目录在公开仓库外。
+## 账号、费用和隐私
 
-输入 `hermes`、`codex` 或 `claude` 中的一条启动，再发：
+Python 核心只用标准库，设计要求 Python 3.10+，本身不需要账号、API key 或联网服务。**理解资料、提取候选和回答问题由你使用的 Agent 模型完成**，可能需要该工具的账号、订阅或 API 费用；远端模型可能接收资料。本地保存不等于离线处理，须先确认模型许可。
 
-```text
-当前目录是我的私人 Wiki，先读取 AGENTS.md 与
-wiki_skills/wiki-context-reader/SKILL.md。
-只读索引与相关正式页，说明目前有什么已批准背景、缺少什么。
-不读原始资料或待审核，不改文件。
-```
+本包不提供微信或 Telegram 登录、独立实时客户端、消息发送或自动调度。它也不是沙箱、访问控制或加密库：拥有文件权限的 Agent 可以绕过脚本，原文、备份和日志可能包含明文敏感资料。不要导入密码、凭据或未获授权的他人资料。
 
-空模板没有你的真实经历，正确结果应说明还没有批准的背景。按 [教程第四节](docs/tutorial.md) 用虚构来源练习导入、部分批准和新会话读取。
+已有真实 Codex 操作示例；这不代表所有 Agent、操作系统或渠道都已兼容。候选包测试状态、历史结果与未验证范围统一见 [验证记录](docs/validation.md)，程序保证和非保证见 [技术边界](references/boundaries.md)。
 
-## 内容
+## 需要时再查
 
-- `templates/wiki/`：空白 Wiki 与三份局部操作规程。
-- `skills/`：同源 Skill，可按各工具原生机制安装。
-- `examples/`：虚构来源与候选示例，不是运行证据。
-- `scripts/wiki_tool.py`：零第三方依赖的 init / check。
-- [设计说明](docs/design.md)、[流程图](docs/workflow.html)、[验证范围](docs/verification.md)。
+- [客户操作指南](USER_GUIDE.md)：每一步说什么、选什么、检查什么。
+- [七步真实操作](docs/seven_steps/README.md)：完整截图和演示范围。
+- [Agent 操作规程](SKILL.md)、[命令与数据格式](references/cli.md)。
+- [渠道条件](references/channels.md)、[可选采集与本地审核摘要](references/connectors.md)。
 
-## 边界
+旧模板用户请看 [legacy/README.md](legacy/README.md)，不要与新脚本混用；本版不自动迁移旧库。旧版文件路径仍保留。
 
-归档不等于批准，AI 建议不等于用户决定。默认不采集聊天、不调度、不通知、不自动合并。没有作者生产系统的采集器、游标、锁或状态库。
-
-本地文件不等于离线处理，云模型可能收到读取的正文；在读取真实资料前确认允许当前提供方处理。Skill 不是权限沙箱，`check` 不验证事实、隐私完整性或模型是否服从。
-
-不要发布私人 Wiki。`.gitignore` 不是数据保护系统。
-
-## 开发测试
-
-测试夹具仅放在已存在、可写的 TMPDIR 中。Bash：
-
-```bash
-mkdir -p "$HOME/.cache/wiki_starter_tests"
-export TMPDIR="$HOME/.cache/wiki_starter_tests"
-python3 -B -m unittest discover -s tests -v
-python3 scripts/wiki_tool.py check --root templates/wiki
-```
-
-跨工具副本由测试逐字节比较，修改源 `skills/` 后应同步 `templates/wiki/wiki_skills/`。当前工具链单测范围见验证记录，不把 WSL 测试当作全平台结果。
-
-## 许可证
-
-新编写的代码、模板和文档采用 [MIT](LICENSE)。各 Agent 为独立产品，按自身许可和服务条款使用。
+原创：阿生（tsetwf-cloud），MIT。保留[仓库原有许可](LICENSE)与[新版程序版权声明](LICENSE.personal-wiki)。公开包不含生产个人 Wiki 正文、私人聊天、账号配置或凭据。

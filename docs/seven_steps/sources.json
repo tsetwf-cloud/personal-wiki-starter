@@ -1,0 +1,50 @@
+[
+  {
+    "file": "screenshots/01_install.png",
+    "source": "retained local real-session recording (not published)",
+    "media_seconds": 10,
+    "type": "unaltered frame from actual session recording",
+    "sha256": "b5c06260346fb720d667aa4e40e3e809fdfc7d05fe2308b0c0c7a417022b85f5"
+  },
+  {
+    "file": "screenshots/02_create.png",
+    "source": "retained local real-session recording (not published)",
+    "media_seconds": 214,
+    "type": "unaltered frame from actual session recording",
+    "sha256": "6ad510890251e2f776d59989adebc1cb9ecb377cc792fa6b7c95eb8d56d2c462"
+  },
+  {
+    "file": "screenshots/03_channels.png",
+    "source": "retained local real-session recording (not published)",
+    "media_seconds": 268,
+    "type": "unaltered frame from actual session recording",
+    "sha256": "3997841898555089a9b756e6b8a6909609206b5ae17cf60f2bfabd74c779efb1"
+  },
+  {
+    "file": "screenshots/04_permission.png",
+    "source": "retained local real-session recording (not published)",
+    "media_seconds": 390,
+    "type": "unaltered frame from actual session recording",
+    "sha256": "20da676aa5a7d0caca93e4b877175c90c37157f55bbf0851d77eb1838a1900ca"
+  },
+  {
+    "file": "screenshots/05_review.png",
+    "source": "retained local real-session recording (not published)",
+    "media_seconds": 501,
+    "type": "unaltered frame from actual session recording",
+    "sha256": "8da1b2f28e25b02cbdcd6af4d0aa7068168282c5418474ebfc41f692f0ea4272"
+  },
+  {
+    "file": "screenshots/06_approved.png",
+    "source": "retained local real-session recording (not published)",
+    "media_seconds": 595,
+    "type": "unaltered frame from actual session recording",
+    "sha256": "fcfceecbfbc356206c34b4443bc06c372e843cfa76e2b23cddecbf9d70f37e3f"
+  },
+  {
+    "file": "screenshots/07_new_session.png",
+    "source": "fresh live Codex session reading same VM Wiki",
+    "type": "actual X11 screenshot; not extracted from earlier failed reader",
+    "sha256": "43de31f6b0f9515daa14fdb03a9b55e025210ce3b0d6138c893d3360032b332d"
+  }
+]
