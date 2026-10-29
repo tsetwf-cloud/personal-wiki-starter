@@ -34,7 +34,7 @@
 
 已有真实 Codex 0.163.0 宿主界面、隔离 Debian 虚拟机文件／命令和远端模型组合下的安装解压、建库、候选提取、部分批准及新会话只读演示。该记录不证明全局注册、原生发现、Claude Code 新包兼容、原生 Windows 或 macOS 兼容。核心不要求账号，但语义处理使用的 Agent 模型可能需要账号、产生费用并向模型提供方发送资料；须单独取得处理许可。
 
-历史 0.1.0 ZIP 的已测环境、包哈希和结果，以及 0.2.0-rc.1 本次新包的待运行项目，统一见 [验证记录](../docs/validation.md)。旧包通过不等于新包通过。测试命令为 `python3 -B -m unittest discover -s tests -v`；虚构 `examples/walkthrough.py` 不调用模型，固定候选只检验确定性流程，不冒充真实模型提取。单元测试数量、合成 JSONL／SQLite 用例或本地待审摘要不构成真实平台接收、调度或通知交付证明。
+历史 0.1.0 ZIP 的环境、包哈希和结果，以及 0.2.0-rc.1 本次新包的本地验证，统一见 [验证记录](../docs/validation.md)。旧包通过不等于新包通过。测试命令为 `python3 -B -m unittest discover -s tests -v`；虚构 `examples/walkthrough.py` 不调用模型，固定候选只检验确定性流程，不冒充真实模型提取。单元测试数量、合成 JSONL／SQLite 用例或本地待审摘要不构成真实平台接收、调度或通知交付证明。
 
 “20 分钟临时 AI 能否从零复现同等可靠性”尚未做对照实验。比较需提前冻结同等验收标准、隔离环境、时间预算、故障矩阵和独立评审，不能以现有演示声称通过。
 
@@ -42,4 +42,4 @@
 
 公开程序从空目录按白名单重建，流程来自已有 Skill 的通用规程；不附生产个人 Wiki 正文、私人聊天、审核状态、账号配置、凭据或生产 ID，不复制私人二级页。示例使用虚构资料。版权所有阿生 (tsetwf-cloud)，MIT。
 
-旧模板与旧说明归档见 [legacy/README.md](../legacy/README.md)，不得与当前脚本混用；本版不自动迁移旧库，也未完成升级或卸载流程验证。
+旧模板与旧说明归档见仓库中的 [`legacy/README.md`](https://github.com/tsetwf-cloud/personal-wiki-starter/blob/main/legacy/README.md)，不得与当前脚本混用；独立候选压缩包不附带旧版归档。本版不自动迁移旧库，也未完成升级或卸载流程验证。

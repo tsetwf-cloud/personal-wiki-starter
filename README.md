@@ -43,6 +43,6 @@ Python 核心只用标准库，设计要求 Python 3.10+，本身不需要账号
 - [Agent 操作规程](SKILL.md)、[命令与数据格式](references/cli.md)。
 - [渠道条件](references/channels.md)、[可选采集与本地审核摘要](references/connectors.md)。
 
-旧模板用户请看 [legacy/README.md](legacy/README.md)，不要与新脚本混用；本版不自动迁移旧库。旧版文件路径仍保留。
+仓库中的旧模板用户请看 [`legacy/README.md`](https://github.com/tsetwf-cloud/personal-wiki-starter/blob/main/legacy/README.md)，不要与新脚本混用；本版不自动迁移旧库。独立候选压缩包不附带旧版归档。
 
 原创：阿生（tsetwf-cloud），MIT。保留[仓库原有许可](LICENSE)与[新版程序版权声明](LICENSE.personal-wiki)。公开包不含生产个人 Wiki 正文、私人聊天、账号配置或凭据。
