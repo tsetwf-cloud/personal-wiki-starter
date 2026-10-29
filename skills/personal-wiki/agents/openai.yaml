@@ -1,0 +1,6 @@
+interface:
+  display_name: "Personal Wiki"
+  short_description: "把指定资料整理为先审后写的个人知识"
+  default_prompt: "使用 $personal-wiki，从我明确授权的资料建立、审核、更新或查询个人 Wiki；先确认范围和模型许可，不把待审内容当成正式知识。"
+policy:
+  allow_implicit_invocation: false

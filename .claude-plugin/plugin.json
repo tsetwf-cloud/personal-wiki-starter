@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "personal-wiki",
+  "version": "0.2.0-rc.2",
+  "description": "Build a reviewed personal Wiki from scoped sources.",
+  "author": {
+    "name": "阿生",
+    "url": "https://github.com/tsetwf-cloud"
+  },
+  "homepage": "https://github.com/tsetwf-cloud/personal-wiki-starter",
+  "repository": "https://github.com/tsetwf-cloud/personal-wiki-starter",
+  "license": "MIT",
+  "keywords": [
+    "personal-wiki",
+    "knowledge-management",
+    "review-workflow"
+  ],
+  "skills": [
+    "./skills/personal-wiki"
+  ]
+}

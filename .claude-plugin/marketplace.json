@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "personal-wiki",
+  "description": "Reviewed personal Wiki workflow and local tooling.",
+  "owner": {
+    "name": "阿生"
+  },
+  "plugins": [
+    {
+      "name": "personal-wiki",
+      "source": "./skills/personal-wiki",
+      "description": "Build a reviewed personal Wiki from scoped sources.",
+      "version": "0.2.0-rc.2",
+      "author": {
+        "name": "阿生"
+      },
+      "homepage": "https://github.com/tsetwf-cloud/personal-wiki-starter",
+      "category": "productivity"
+    }
+  ]
+}

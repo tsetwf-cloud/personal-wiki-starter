@@ -1,6 +1,22 @@
 # 验证记录
 
-本页区分历史安装包测试、已完成的真实 Agent 演示与 `0.2.0-rc.1` 公开候选本次验证。版本、环境和包哈希属于验证范围，不能将旧结果沿用为新包通过。本文列明证据能说明什么，不以测试数量代替兼容性结论。
+## 0.2.0-rc.2：安装发现与显式调用层
+
+本候选在 0.2.0-rc.1 的业务核心上增加标准 Skill 安装和宿主入口。各层必须分开理解：
+
+- **发现与复制：** Skills CLI 1.7.4 从白名单生成的 `skills/personal-wiki` 发现一个主 Skill，并在隔离 HOME／项目中把完整包复制到 Codex、Claude Code 和 Hermes 的 Skill 目录；安装副本按 `distribution-manifest.json` 核对全部文件和 SHA-256。
+- **安装副本运行：** 从隔离安装副本运行完整 Python 测试和虚构 walkthrough，不借用源码工作树。
+- **Claude 插件：** Claude Code 2.1.296 对 `.claude-plugin` 清单做严格校验，并在隔离配置目录完成本地 Marketplace 安装。插件清单只指向 `skills/personal-wiki`，入口为 `/personal-wiki:personal-wiki`。当前环境未登录，未执行模型会话调用。
+- **Codex 显式调用：** Codex 0.163.0 在隔离 HOME 中完成 Skills CLI 全局复制，并实际使用 `$personal-wiki` 加载根 `SKILL.md`，回报名称 `personal-wiki` 与版本 `0.2.0-rc.2`。`agents/openai.yaml` 关闭 Codex 的隐式调用；此设置不影响 Claude Code 或 Hermes。
+- **Claude 调用限制：** 当前 Claude Code 环境未登录，因此未执行模型会话中的 `/personal-wiki` 或 `/personal-wiki:personal-wiki`；本轮只证明 Skills CLI 完整复制、清单严格校验、插件安装及单一 `personal-wiki` 组件被发现。
+- **Hermes 调用限制：** Hermes 0.22.2 已验证 Skills CLI 完整复制和本地 Skill 目录结构；隔离 HOME 未配置模型，因此未执行 `/skill personal-wiki` 的模型会话。Hermes Hub 当前索引仍指向 rc.1 仓库根，并因历史教程中的安装命令触发安全扫描而阻止安装，故 rc.2 不以 Hub 根标识作为推荐路线。
+- **业务证据：** 既有 Codex 0.163.0 七步截图仍用于说明建库、范围确认、部分审核和独立新会话只读正式知识；它不单独证明 rc.2 的安装器路径。安装验证和业务截图是两类证据。
+
+公开发布后还需从最终 Release 附件重新下载、核对 SHA-256，并重复安装副本测试；本节的本地验证不能替代公开附件回读。最终附件哈希记录在 Release 正文，避免把压缩包自身哈希写入包内文档造成自引用。
+
+本地 rc.2 仓库在 WSL/Linux、Python 3.14.7 下执行 `python3 -B -m unittest discover -s tests -v`，共 68 项；实际结果以本次最终运行记录为准。白名单分发包由 `distribution-files.json` 生成，安装目录包含 32 个文件（含生成的 `distribution-manifest.json`），每个源文件都有 SHA-256。最终公开附件的哈希在上传后写入 Release 正文，不能沿用本地重建过程中的中间值。
+
+本页区分历史安装包测试、已完成的真实 Agent 演示、`0.2.0-rc.1` 核心候选与 `0.2.0-rc.2` 安装调用候选的验证。版本、环境和包哈希属于验证范围，不能将旧结果沿用为新包通过。本文列明证据能说明什么，不以测试数量代替兼容性结论。
 
 ## 1. 历史已测包：0.1.0
 

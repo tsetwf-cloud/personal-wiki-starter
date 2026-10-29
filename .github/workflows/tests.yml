@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.20.0'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -14,5 +17,11 @@ jobs:
         env:
           TMPDIR: ${{ runner.temp }}
         run: python3 -B -m unittest discover -s tests -v
+      - name: Build and verify installable Skill package
+        run: |
+          python3 -B scripts/build_distribution.py
+          python3 -B scripts/verify_skill_install.py --source skills/personal-wiki --static-only
+      - name: Validate Claude plugin manifests
+        run: npx --yes @anthropic-ai/claude-code@2.1.296 plugin validate --strict .
       - name: Check preserved legacy template
         run: python3 legacy/scripts/wiki_tool.py check --root legacy/templates/wiki
