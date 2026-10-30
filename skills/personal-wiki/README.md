@@ -93,6 +93,40 @@ Agent 会先让你确认 Wiki 保存位置、资料范围和模型处理许可�
 
 按本 Skill 规程操作时，程序会限制处理范围、要求逐项审核，并让新会话默认只读正式知识；但拥有同等文件权限的 Agent 仍可能绕过脚本。
 
+## 实际操作演示
+
+下面是一次真实 Agent 操作过程。演示资料属于虚构人物“林舟”，不包含真实个人 Wiki 或私人聊天。截图展示的是安装后从建库、授权、审核到新会话读取的完整业务流程；当前版本的显式安装和调用方式以上面的三步说明为准。
+
+### 1. 用自然语言要求 Agent 安装并开始使用
+
+![用自然语言要求 Agent 安装 Personal Wiki Skill](docs/seven_steps/screenshots/01_install.png)
+
+### 2. 确认 Wiki 保存位置和一级目录
+
+![确认 Wiki 保存位置和一级目录](docs/seven_steps/screenshots/02_create.png)
+
+### 3. 选择是否接入聊天渠道
+
+![选择是否接入聊天渠道](docs/seven_steps/screenshots/03_channels.png)
+
+### 4. 确认资料范围和模型处理许可
+
+![确认资料范围和模型处理许可](docs/seven_steps/screenshots/04_permission.png)
+
+### 5. 查看待审核候选，不直接写入正式知识
+
+![查看待审核候选](docs/seven_steps/screenshots/05_review.png)
+
+### 6. 只批准确认过的内容
+
+![只批准确认过的内容](docs/seven_steps/screenshots/06_approved.png)
+
+### 7. 在新会话中只读取正式知识
+
+![在新会话中只读取正式知识](docs/seven_steps/screenshots/07_new_session.png)
+
+[查看七步操作说明、截图来源和核验记录](docs/seven_steps/README.md)
+
 ## 什么时候用
 
 ### 建立一套可审核的个人知识
