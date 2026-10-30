@@ -53,9 +53,9 @@ class DistributionTests(unittest.TestCase):
 
     def test_reader_docs_lead_with_install_invoke_and_visible_result(self):
         readme = (PACKAGE / 'README.md').read_text(encoding='utf-8')
-        for marker in ['三步快速开始', '什么时候用', '怎么说', '你会得到',
-                       '$personal-wiki', '/personal-wiki', '/personal-wiki:personal-wiki',
-                       '命令没有出现', '候选不等于正式知识']:
+        for marker in ['三步开始使用', '什么时候用', '怎么说', '你会得到',
+                       '显式调用', '$personal-wiki', '/personal-wiki', '/personal-wiki:personal-wiki',
+                       '/skill personal-wiki', '命令没有出现', '正式知识']:
             self.assertIn(marker, readme)
         self.assertNotIn('不做宿主全局注册', readme)
 

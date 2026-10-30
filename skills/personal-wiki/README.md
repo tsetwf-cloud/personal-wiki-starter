@@ -1,28 +1,32 @@
 # Personal Wiki
 
-把你明确选择的对话和文件，整理成一套由你审核、保存在自己目录里的个人知识。
+把你指定的对话和文件，整理成一套**先审核、再入库、以后能继续查询**的个人 Wiki。正式知识、待审核内容和原始来源分开保存，文件都在你选择的本地目录里。
 
-按本 Skill 规程操作时，程序会执行以下门槛；但它不是权限沙箱，拥有同等文件权限的 Agent 仍可能绕过脚本：
+**安装后直接在 Agent 对话框输入固定入口，不需要先学习仓库里的脚本：**
 
-- **只处理明确范围**：不默认扫描所有文件、聊天或历史会话。
-- **先看候选，再决定入库**：候选不等于正式知识；未批准内容留在待审区。
-- **新会话只读正式知识**：计划、他人说法和 AI 建议不会因为被看到就变成你的既定事实。
+```text
+Codex：      $personal-wiki 帮我建立个人 Wiki
+Claude Code：/personal-wiki 帮我建立个人 Wiki
+Claude 插件：/personal-wiki:personal-wiki 帮我建立个人 Wiki
+Hermes：     /skill personal-wiki 帮我建立个人 Wiki
+```
 
-你会得到 Markdown 正式知识页、来源档案、逐项审核状态、修改日志和本地备份。适合保存长期有用的工作背景、协作偏好、已有判断、计划和决策。
+你可以用它：
 
-当前公开候选版本：`0.2.0-rc.2`。第一次请用虚构或低敏感资料完成一次“提交 → 审核 → 新会话读取”。
+- 建立一套由自己审核的 Markdown 个人知识库。
+- 整理指定对话或文件，先生成候选，不直接改正式知识。
+- 只批准其中一部分，其余内容继续待审或拒绝。
+- 在新会话中只查询已经批准的知识。
 
-> **隐私提醒：** 文件保存在本地，不代表内容没有发送给远端模型。读取真实资料前，必须分别确认资料范围和模型处理许可。本项目不是加密库、权限沙箱或凭据保险箱。
+[三步开始使用](#三步开始使用) · [查看真实截图](docs/seven_steps/README.md) · [查看验证范围](docs/validation.md)
 
-- **开始使用：** [三步快速开始](#三步快速开始)
-- **先看效果：** [七步真实操作与截图](docs/seven_steps/README.md)
-- **查看验证范围：** [验证记录](docs/validation.md)
+当前公开候选版本：`0.2.0-rc.2`。第一次请使用虚构或低敏感资料。
 
-## 三步快速开始
+## 三步开始使用
 
-### 第 1 步：安装并使用固定名称调用
+### 第 1 步：安装
 
-需要 Node.js 22.20+，以及能读取本地文件、创建文件并运行 Python 命令的 Agent。下面是在**终端**执行的全局安装命令；把 `<agent>` 替换为 `codex`、`claude-code` 或 `hermes-agent`，一次只装到你正在使用的宿主：
+需要 Node.js 22.20+，以及能读取文件、创建文件并运行 Python 命令的 Agent。在**终端**运行下面的命令，把 `<agent>` 换成你使用的宿主：`codex`、`claude-code` 或 `hermes-agent`。
 
 ```bash
 npx --yes skills@1.7.4 add https://github.com/tsetwf-cloud/personal-wiki-starter/tree/v0.2.0-rc.2/skills/personal-wiki \
@@ -30,38 +34,64 @@ npx --yes skills@1.7.4 add https://github.com/tsetwf-cloud/personal-wiki-starter
   --skill personal-wiki --copy -g -y
 ```
 
-这条命令把完整 Skill 包复制到所选宿主，不只安装 `SKILL.md`。安装后新开会话，再在 **Agent 对话框**使用该宿主的入口：
+例如，安装到 Codex：
 
-- **Codex**：`$personal-wiki`
-- **Claude Code（Skills CLI 安装）**：`/personal-wiki`
-- **Claude Code 插件安装**：`/personal-wiki:personal-wiki`
-- **Hermes**：`/skill personal-wiki`；命令行也可用 `hermes -s personal-wiki`
+```bash
+npx --yes skills@1.7.4 add https://github.com/tsetwf-cloud/personal-wiki-starter/tree/v0.2.0-rc.2/skills/personal-wiki \
+  --agent codex --skill personal-wiki --copy -g -y
+```
 
-固定名称是 `personal-wiki`，但调用符号由宿主决定；不要把一种命令写法套到所有 Agent。Claude 插件路线见[其他安装方式](#其他安装方式)。
+安装后新开一个 Agent 会话。该命令会复制完整 Skill 包，不只是一个 `SKILL.md`。
 
-第一次调用可以说：
+### 第 2 步：在 Agent 对话框显式调用
 
-> 使用 personal-wiki 帮我建立个人 Wiki。先检查当前宿主、Skill 版本、Python、文件和命令能力；第一次只用虚构资料，不接聊天渠道，不设置定时任务。
+根据宿主输入对应入口。下面是可以直接复制的第一次请求：
 
-### 第 2 步：确认建库方式和边界
+**Codex**
 
-新建时可以说：
+```text
+$personal-wiki 帮我建立个人 Wiki。第一次只用虚构资料，不接聊天渠道，不设置定时任务。
+```
 
-> 请建议一个独立的完整保存路径，展示将创建的一级目录，等我确认后再新建空白 Wiki。读取资料前，先让我确认资料范围和模型处理许可。
+**Claude Code（Skills CLI 安装）**
 
-已有库则先只读检查，不覆盖正文、不移动目录、不自动迁移。默认一级分类只有：`00-基础信息`、`01-认知`、`02-生活`、`03-工作`、`04-创业`、`99-收件箱`。
+```text
+/personal-wiki 帮我建立个人 Wiki。第一次只用虚构资料，不接聊天渠道，不设置定时任务。
+```
 
-### 第 3 步：提交资料，审核后再入库
+**Claude Code 插件**
 
-先使用虚构资料：
+```text
+/personal-wiki:personal-wiki 帮我建立个人 Wiki。第一次只用虚构资料，不接聊天渠道，不设置定时任务。
+```
 
-> 以下是虚构人物林舟的资料：他希望 AI 先给结论，再解释理由，发现问题直接指出。他考虑每周整理学习笔记，但还没开始。请生成待审核候选，保留条件、来源依据和完整拟保存路径，不要直接修改正式知识页。
+**Hermes**
 
-收到候选后，可以只批准一部分：
+```text
+/skill personal-wiki 帮我建立个人 Wiki。第一次只用虚构资料，不接聊天渠道，不设置定时任务。
+```
 
-> 只批准“沟通偏好”这一项，并确认其拟保存路径。学习笔记计划继续待审；不要批准或合并其他内容。
+固定名称始终是 `personal-wiki`，前面的 `$`、`/` 或 `/skill` 由宿主决定。Claude 插件安装方法见[其他安装方式](#其他安装方式)。
 
-新会话再次显式调用 `personal-wiki`，询问林舟的沟通偏好以及他是否已经开始每周整理学习笔记。合格结果是：读出已批准的偏好，对未批准的计划回答“正式知识不足以确认”。
+### 第 3 步：按提示确认，再继续使用
+
+Agent 会先让你确认 Wiki 保存位置、资料范围和模型处理许可。确认后，可以在同一个对话里继续说：
+
+```text
+以下是虚构人物林舟的资料：他希望 AI 先给结论，再解释理由，发现问题直接指出。他考虑每周整理学习笔记，但还没开始。请生成待审核候选，不要直接修改正式知识页。
+```
+
+看到候选后，只批准你确认过的内容：
+
+```text
+只批准“沟通偏好”这一项。学习笔记计划继续待审；不要合并其他内容。
+```
+
+以后新开会话时，再次用同一个显式入口调用 `personal-wiki`。它会只读取已经批准的正式知识；对尚未批准的计划，应回答“正式知识不足以确认”。
+
+> **隐私提醒：** 文件保存在本地，不代表内容没有发送给远端模型。读取真实资料前，必须分别确认资料范围和模型处理许可。本项目不是加密库、权限沙箱或凭据保险箱。
+
+按本 Skill 规程操作时，程序会限制处理范围、要求逐项审核，并让新会话默认只读正式知识；但拥有同等文件权限的 Agent 仍可能绕过脚本。
 
 ## 什么时候用
 
@@ -126,19 +156,17 @@ Claude Code 可以通过本仓库自带的插件清单安装。下面先在 Clau
 4. 区分“Skill 没被发现”和“Skill 已发现但脚本缺失”。后一种情况要重新安装完整包，不能只补一个 `SKILL.md`。
 5. 仍无法使用时，运行 `python3 -B scripts/verify_skill_install.py --source <完整包路径>`。输出包含本机路径；对外分享前先删除用户名和目录结构。
 
-## 已验证与尚待验证
+## 已验证与使用范围
 
-当前候选已经验证：
+如果你只想开始使用，读到这里已经足够；下面是兼容性和测试边界。完整命令、测试结果和未验证范围见[验证记录](docs/validation.md)。
 
-- Skills CLI 能从 `skills/personal-wiki` 发现一个主 Skill，并把白名单完整包隔离复制到 Codex、Claude Code 和 Hermes 的 Skill 目录；安装脚本还会从项目级副本运行回归测试。
-- 安装后的复制包可以运行完整 Python 测试和虚构 walkthrough。
-- Claude Code 2.1.296 的插件清单可以严格校验并在隔离配置中安装；插件入口带命名空间。
-- Codex 0.163.0 已在隔离 HOME 中通过全局 Skills CLI 安装并使用 `$personal-wiki` 显式加载 `0.2.0-rc.2`；既有真实七步操作与独立新会话读取截图仍属于业务流程证据，两类证据分开记录。
-- Claude Code 当前环境未登录，尚未执行模型会话中的 `/personal-wiki` 或 `/personal-wiki:personal-wiki`；已验证的是 Skills CLI 完整复制、插件严格校验与插件组件发现。
-- Hermes 0.22.2 已验证完整包复制和本地 Skill 目录结构；隔离环境没有配置模型，因此尚未执行 `/skill personal-wiki` 的模型会话。Hermes Hub 的旧 rc.1 仓库根索引因历史教程中的安装命令触发安全扫描而被阻止，不作为 rc.2 推荐安装路线。
-- Python 核心不依赖 Hermes、OAuth、API key 或联网服务。
+- **已实际调用：** Codex 0.163.0 已通过 Skills CLI 安装，并使用 `$personal-wiki` 显式加载 `0.2.0-rc.2`。
+- **已验证安装：** 完整 Skill 包可以复制到 Codex、Claude Code 和 Hermes；安装副本测试和虚构 walkthrough 通过。
+- **Claude Code：** 2.1.296 的插件清单严格校验和单一组件安装通过；当前环境未登录，因此没有执行模型会话中的 `/personal-wiki` 或 `/personal-wiki:personal-wiki`。
+- **Hermes：** 0.22.2 的完整复制和本地 Skill 目录结构通过；隔离环境没有配置模型，因此没有执行 `/skill personal-wiki` 的模型会话。
+- **尚未验证：** 原生 Windows、macOS、Python 3.10 最低 runtime、所有宿主版本、真实微信／Telegram 收消息、自动调度和远端通知。未验证不等于不支持。
 
-尚未验证：原生 Windows、macOS、Python 3.10 最低 runtime、所有宿主版本、真实微信／Telegram 收消息、自动调度和远端通知。未验证不等于不支持，但不能写成已兼容。详见[验证记录](docs/validation.md)。
+Python 核心不依赖 Hermes、OAuth、API key 或联网服务。
 
 ## 账号、费用和隐私
 
